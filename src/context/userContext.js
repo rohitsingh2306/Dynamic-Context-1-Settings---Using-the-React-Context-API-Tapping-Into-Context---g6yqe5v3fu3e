@@ -1,16 +1,20 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 
-
-const UserContext = createContext()
+const UserContext = createContext();
 
 const Wrapper = (props) => {
+  const greeting = "Hello";
+  const [state, setState] = useState(greeting);
 
-    const greeting = "Hello"
-  
-    return (
-        <UserContext.Provider value={{ greeting }}>
-            {props.children}
-        </UserContext.Provider>
-    )
-}
-export { Wrapper, UserContext }
+  const changeGreeting = (data) => {
+    setState(data);
+    console.log(data);
+  };
+
+  return (
+    <UserContext.Provider value={{ greeting: state, changeGreeting }}>
+      {props.children}
+    </UserContext.Provider>
+  );
+};
+export { Wrapper, UserContext };
